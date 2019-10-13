@@ -99,7 +99,7 @@ public class CheckDate{
        return dateFromDB;
 
 }
-public void compareCurrencyRatesDates() throws ParseException {
+public boolean  compareCurrencyRatesDates() throws ParseException {
 Date dateFromURL= DateFromURL();
 Date dateFromDB = DateFromDB();
 
@@ -117,6 +117,7 @@ Date dateFromDB = DateFromDB();
     else c3 = false;
 System.out.println("c3 is true or false: "  +c3);
     System.out.println(c1.compareTo(c2) == 0);
+    return c3;
 }
 
     public java.sql.Date convertFromJAVADateToSQLDate(){

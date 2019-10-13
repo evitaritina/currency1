@@ -8,7 +8,7 @@ import java.util.List;
 
 public class witeDataToDB {
 
-    public static void main(String[] args) {
+    public static void main() {
         //   public void writeTo(){
         {
             try {
@@ -60,6 +60,7 @@ public class witeDataToDB {
 
         }
     }
+
 
 
 }
