@@ -60,13 +60,6 @@ public class JsoupRun {
             System.out.println(listStrings.size());
 
         }
-//        Currency c = new Currency(name, rate);
-//        for (Currency currency : listStrings) {
-
-
-//            saveToDB(currency);
-  //      }
-
 
         return listStrings;
     }

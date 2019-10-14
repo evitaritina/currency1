@@ -8,7 +8,7 @@ public class Main {
         witeDataToDB writeData = new witeDataToDB();
 
         boolean curDat = dat.compareCurrencyRatesDates();
-        //should be false
+
         if (curDat == true) {
             System.out.println("Data for this date exist " +curDat);
         } else {
