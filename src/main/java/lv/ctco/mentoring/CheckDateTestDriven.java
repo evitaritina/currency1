@@ -1,18 +1,16 @@
 package lv.ctco.mentoring;
 
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
 
 public class CheckDateTestDriven {
     public static void main (String[] args) throws ParseException {
         CheckDate d = new CheckDate();
-        witeDataToDB w = new witeDataToDB();
+        WriteDataToDB w = new WriteDataToDB();
 JsoupRun j = new JsoupRun();
 
 
-        d.DateFromURL();
-        d.DateFromDB();
+        d.dateFromURL();
+        d.dateFromDB();
 //        Date dateFromURL = d.getDateFromURL();
  //       Date dateFromDB = d.getDateFromDB();
         d.compareCurrencyRatesDates();

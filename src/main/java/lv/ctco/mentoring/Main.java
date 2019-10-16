@@ -5,14 +5,14 @@ import java.text.ParseException;
 public class Main {
     public static void main(String[] args) throws ParseException {
         CheckDate dat = new CheckDate();
-        witeDataToDB writeData = new witeDataToDB();
+        WriteDataToDB writeData = new WriteDataToDB();
 
         boolean curDat = dat.compareCurrencyRatesDates();
 
         if (curDat == true) {
-            System.out.println("Data for this date exist " +curDat);
+            System.out.println("Data for this date exist ");
         } else {
-          witeDataToDB.main();
+          WriteDataToDB.main();
         }
 
     }

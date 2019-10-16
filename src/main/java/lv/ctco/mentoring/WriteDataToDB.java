@@ -1,17 +1,13 @@
 package lv.ctco.mentoring;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Calendar;
 import java.util.List;
 
 
-public class witeDataToDB {
-
+public class WriteDataToDB {
     public static void main() {
-        //   public void writeTo(){
-        {
-            try {
+             try {
                 // create a mysql database connection
                 String myDriver = "org.gjt.mm.mysql.Driver";
                 String myUrl = "jdbc:mysql://localhost:3306/javastudy?autoReconnect=true&useSSL=false";
@@ -26,17 +22,14 @@ public class witeDataToDB {
                 String query = " insert into rates (rate_date, currency, rate, upload_date)"
                         + " values (?, ?, ?, ?)";
 
-
                 CheckDate sqlDate = new CheckDate();
                 java.sql.Date sqlData1;
-                sqlDate.DateFromURL();
+                sqlDate.dateFromURL();
                 Date sqlDate1 = sqlDate.convertFromJAVADateToSQLDate();
                 System.out.println("sqlData1: " + sqlDate1);
 
-
                 JsoupRun jsoupRun = new JsoupRun();
                 List<Currency> currencyList = jsoupRun.main();
-
 
                 // create the mysql insert preparedstatement
                 for (Currency currency : currencyList) {
@@ -46,10 +39,8 @@ public class witeDataToDB {
                     preparedStmt.setBigDecimal(3, currency.getRate());
                     preparedStmt.setDate(4, startDate);
 
-
                     // execute the preparedstatement
                     preparedStmt.execute();
-
                 }
                 conn.close();
             } catch (Exception e) {
@@ -57,11 +48,7 @@ public class witeDataToDB {
                 System.err.println(e.getMessage());
                 e.printStackTrace();
             }
-
         }
     }
 
-
-
-}
 

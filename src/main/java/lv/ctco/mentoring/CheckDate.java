@@ -25,20 +25,16 @@ public class CheckDate{
     java.sql.Date sqlDate;
 
 
-    public Date DateFromURL() {
+    public Date dateFromURL() {
         Document doc = null;
 
         try {
             doc = Jsoup.connect("https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html").get();
-
         } catch (IOException e) {
-
             e.printStackTrace();
         }
 
-
         Element element = doc.getElementsByTag("h2").first();
-        //  System.out.println("Text with date: " + element + "\n" + element.toString());
         System.out.println("Text with date: " + element);
         title = element.toString();
 
@@ -46,7 +42,7 @@ public class CheckDate{
         title = title.substring(43, title.length() - 5);
         System.out.println(title);
         String string = title;
-       DateFormat format = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
+        DateFormat format = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
 
        try {
            dateFromURL = format.parse(string);
@@ -59,7 +55,7 @@ public class CheckDate{
         return dateFromURL;
     }
 
-    public Date DateFromDB(){
+    public Date dateFromDB(){
     {
         try
         {
@@ -69,8 +65,7 @@ public class CheckDate{
             Class.forName(myDriver);
             Connection conn = DriverManager.getConnection(myUrl, "root", "admin");
 
-            // our SQL SELECT query.
-            // if you only need a few columns, specify them by name instead of using "*"
+            // SQL SELECT query.
             String query = "SELECT MAX(cast(rate_date as Date)) AS rate_date FROM rates";
 
             // create the java statement
@@ -82,7 +77,6 @@ public class CheckDate{
             // iterate through the java resultset
             while (rs.next())
             {
-
                 dateFromDB = rs.getDate("rate_date");
 
                 // print the results
@@ -100,8 +94,8 @@ public class CheckDate{
 
 }
 public boolean  compareCurrencyRatesDates() throws ParseException {
-Date dateFromURL= DateFromURL();
-Date dateFromDB = DateFromDB();
+Date dateFromURL= dateFromURL();
+Date dateFromDB = dateFromDB();
 
     Calendar c1 = Calendar.getInstance();
     Calendar c2 = Calendar.getInstance();
@@ -113,9 +107,8 @@ Date dateFromDB = DateFromDB();
 
     boolean c3;
     if ((c1.compareTo(c2) == 0)) c3 = true;
-
     else c3 = false;
-System.out.println("c3 is true or false: "  +c3);
+    System.out.println("c3 is true or false: "  +c3);
     System.out.println(c1.compareTo(c2) == 0);
     return c3;
 }
@@ -128,6 +121,7 @@ System.out.println("c3 is true or false: "  +c3);
         System.out.println("sqlDate" + sqlDate);
              return sqlDate;
     }
+
     public java.sql.Date get_convertFromJAVADateToSQLDate(){
         return this.sqlDate;
     }
@@ -135,6 +129,7 @@ System.out.println("c3 is true or false: "  +c3);
     public Date get_dateFromURL(){
         return this.dateFromURL;
     }
+
     public Date get_DateFromDB(){
         return this.dateFromDB;
     }
