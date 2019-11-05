@@ -1,19 +1,15 @@
 package lv.ctco.mentoring;
 
+import lv.ctco.mentoring.service.CurrencyRateUpdateService;
+
+import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 
+//  TODO: log4j
 public class Main {
-    public static void main(String[] args) throws ParseException {
-        CheckDate dat = new CheckDate();
-        WriteDataToDB writeData = new WriteDataToDB();
-
-        boolean curDat = dat.compareCurrencyRatesDates();
-
-        if (curDat == true) {
-            System.out.println("Data for this date exist ");
-        } else {
-          WriteDataToDB.main();
-        }
-
+    public static void main(String[] args) throws ParseException, IOException, SQLException, ClassNotFoundException {
+        CurrencyRateUpdateService currencyRateUpdateService = new CurrencyRateUpdateService();
+        currencyRateUpdateService.updateRates();
     }
 }

@@ -1,4 +1,4 @@
-package lv.ctco.mentoring;
+package lv.ctco.mentoring.entity;
 
 import java.math.BigDecimal;
 
