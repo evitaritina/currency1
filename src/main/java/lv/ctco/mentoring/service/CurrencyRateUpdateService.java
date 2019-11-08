@@ -11,9 +11,12 @@ import java.util.Date;
 import java.util.List;
 
 public class CurrencyRateUpdateService {
+    private static ECBService ecbService = new ECBService();
+    private static CurrencyRateDBService currencyRateDBService;
 
-    private ECBService ecbService = new ECBService();
-    private CurrencyRateDBService currencyRateDBService = new CurrencyRateDBService();
+    {
+        currencyRateDBService = new CurrencyRateDBService();
+    }
 
     public CurrencyRateUpdateService() throws ClassNotFoundException {
     }
