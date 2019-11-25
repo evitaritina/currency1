@@ -15,17 +15,15 @@ import java.util.*;
 import java.util.Date;
 
 public class ECBService {
-
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
     private static final String ECB_URL = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html";
 
-    public Date getLastUpdateDate() throws ParseException, IOException {
+    public static Date getLastUpdateDate() throws ParseException, IOException {
         Document doc = Jsoup.connect(ECB_URL).get();
-
         return extractDate(doc);
     }
 
-    private Date extractDate(Document doc) throws ParseException {
+    private static Date extractDate(Document doc) throws ParseException {
         Element h2WithDateElement = doc.getElementsByTag("h2").first();
 
         String h2WithDate = h2WithDateElement.toString();
@@ -35,7 +33,7 @@ public class ECBService {
     }
 
 
-    public List<Currency> getRates() throws IOException {
+    public static List<Currency> getRates() throws IOException {
         List<Currency> rates = new ArrayList<>();
 
         Document doc = Jsoup.connect(ECB_URL).get();
@@ -50,7 +48,7 @@ public class ECBService {
         return rates;
     }
 
-    private Currency extractRate(Element row) {
+    private static Currency extractRate(Element row) {
         Elements tds = row.select("td");
 
         String currency_name = tds.get(0).text();

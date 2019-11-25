@@ -2,10 +2,14 @@ package lv.ctco.mentoring.service.database;
 
 import lv.ctco.mentoring.entity.Currency;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
-
 
 public class CurrencyRateDBService {
 
@@ -16,11 +20,9 @@ public class CurrencyRateDBService {
     private static final String USER = "root";
     private static final String PASSWORD = "admin";
 
-    public CurrencyRateDBService() throws ClassNotFoundException {
+    public static Date getLastUpdateDate() throws ClassNotFoundException, SQLException {
         Class.forName("org.gjt.mm.mysql.Driver");
-    }
 
-    public Date getLastUpdateDate() throws SQLException {
         Date dateFromDB = null;
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
             try (Statement st = conn.createStatement()) {
@@ -35,7 +37,7 @@ public class CurrencyRateDBService {
         return dateFromDB;
     }
 
-    public void saveNewRates(List<Currency> rates, Date ratesDate) throws SQLException {
+    public static void saveNewRates(List<Currency> rates, Date ratesDate) throws SQLException {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
             for (Currency rate : rates) {
                 saveNewRate(rate, ratesDate, conn);
@@ -43,7 +45,7 @@ public class CurrencyRateDBService {
         }
     }
 
-    private void saveNewRate(Currency rate, Date rateDate, Connection conn) throws SQLException {
+    private static void saveNewRate(Currency rate, Date rateDate, Connection conn) throws SQLException {
         try (PreparedStatement preparedStmt = conn.prepareStatement(INSERT_RATE_QUERY)) {
             preparedStmt.setDate(1, new java.sql.Date(rateDate.getTime()));
             preparedStmt.setString(2, rate.getName());
@@ -53,7 +55,6 @@ public class CurrencyRateDBService {
             preparedStmt.execute();
         }
     }
-
 }
 
 
